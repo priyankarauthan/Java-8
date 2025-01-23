@@ -79,6 +79,16 @@ public class Main {
         List<Integer> oneToTen = of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         Integer secondMax = oneToTen.stream().sorted(Comparator.reverseOrder()).skip(1).findFirst().orElse(Integer.MAX_VALUE);
     }
+    public static void sortByAge(){
+    List<Person> people = Arrays.asList(
+            new Person("Alice", 30),
+            new Person("Bob", 25),
+            new Person("Charlie", 35)
+    );
+    List<Person>sortedAge = people.stream().sorted(Comparator.comparingInt(Person::getAge).reversed()).collect(Collectors.toList());
+    System.out.println(sortedAge);
+    }
+    }
 
 
 
