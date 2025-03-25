@@ -18,6 +18,50 @@ Java 8 introduced several new features, including:
 
 ✅ Collectors and Functional Interfaces – Collectors.toList(), Predicate, Consumer
 
+### DATE TIME API
+
+1. Immutability & Thread Safety
+✅ New API (java.time): Immutable and thread-safe.
+❌ Old API (java.util.Date, Calendar): Mutable and not thread-safe.
+
+2. Package & Class Structure
+✅ New API: Introduced in java.time package (LocalDate, LocalTime, LocalDateTime, ZonedDateTime).
+❌ Old API: Used java.util and java.sql (Date, Calendar, TimeZone), which were confusing and inconsistent.
+
+3. Clearer API Design
+✅ New API: Months start at 1 (January = 1).
+❌ Old API: Months start at 0 (January = 0), which often led to confusion.
+
+4. Better Time Zone Handling
+✅ New API: Uses ZoneId and ZonedDateTime, providing robust time zone support.
+❌ Old API: Used TimeZone, which had limited capabilities and required manual conversions.
+
+5. Improved Date Formatting & Parsing
+✅ New API: Uses DateTimeFormatter (thread-safe and easy to use).
+❌ Old API: Used SimpleDateFormat (not thread-safe, required synchronization).
+
+6. Built-in Support for Durations and Periods
+✅ New API: Provides Duration (time-based) and Period (date-based) classes for date-time differences.
+❌ Old API: Required manual date difference calculations, making it error-prone.
+
+7. Fluent API for Date Manipulation
+✅ New API: Uses methods like .plusDays(), .minusWeeks(), .withDayOfMonth().
+❌ Old API: Required modifying Calendar fields manually (add(), set()).
+
+8. LocalDate and LocalTime Separation
+✅ New API: Clearly separates date (LocalDate), time (LocalTime), and both (LocalDateTime).
+❌ Old API: java.util.Date included both date and time, leading to confusion.
+
+9. Handling of Leap Years & DST Adjustments
+✅ New API: Properly handles leap years and Daylight Saving Time (DST) changes.
+❌ Old API: Required manual handling of leap years and DST.
+
+10. More Readable and Expressive Code
+✅ New API: Uses clear and expressive method names (LocalDate.of(2024, 3, 25)).
+❌ Old API: Required cumbersome and unintuitive code (Calendar.set(Calendar.MONTH, 2)).
+
+
+
 
 
 ## Static Methods in Interfaces in Java (Java 8+)
