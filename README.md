@@ -5,11 +5,17 @@
 Java 8 introduced several new features, including:
 
 ✅ Lambda Expressions – Enables functional programming
+
 ✅ Functional Interfaces – Single abstract method interfaces
+
 ✅ Streams API – Process collections in a functional way
+
 ✅ Default & Static Methods in Interfaces – Method implementation inside interfaces
+
 ✅ Optional Class – Avoids NullPointerException
+
 ✅ New Date and Time API – LocalDate, LocalTime, LocalDateTime
+
 ✅ Collectors and Functional Interfaces – Collectors.toList(), Predicate, Consumer
 
 
