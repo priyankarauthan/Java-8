@@ -86,5 +86,10 @@ Similarly, CompletableFuture lets your program continue doing other work while w
 🚀 Running multiple tasks in parallel
 🚀 Avoiding blocking operations
 
+### 🔹 Core Difference Between map and flatmap
+
+ map()- transforms elements
+ flatMap()- transforms AND flattens nested structures
+
 
 
