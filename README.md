@@ -1,4 +1,4 @@
-# Java 8 Interview Coding Questions
+# Java 8 & AboveInterview Coding Questions
 
 ### 1. What are the key features of Java 8?
 
@@ -91,5 +91,144 @@ Similarly, CompletableFuture lets your program continue doing other work while w
  map()- transforms elements
  flatMap()- transforms AND flattens nested structures
 
+### Records
+
+Java records are immutable data carrier classes that reduce boilerplate code by automatically generating constructors, accessors, equals, hashCode, and toString.
+
+a) Records are final
+
+b) Fields are implicitly final
+
+c) Cannot extend other classes
+
+d) Can implement interfaces
+
+e) Introduced in Java 16 (preview in 14)
+
+## ✨ With Record Java automatically generates
+
+public record Employee(String name, int age) { }
+
+
+Java automatically generates:
+
+✅ Constructor
+
+✅ Getters
+
+✅ equals()
+
+✅ hashCode()
+
+✅ toString()
+
+
+## 🧾 Create a Java Record
+
+Example: Country
+```
+public record Country(String name, String capital, int population) {
+}
+```
+That’s the entire class.
+
+## 🔹 How to use this Record
+```
+public class TestRecord {
+    public static void main(String[] args) {
+
+        Country country = new Country("India", "New Delhi", 140);
+
+        System.out.println(country.name());
+        System.out.println(country.capital());
+        System.out.println(country.population());
+
+        System.out.println(country);
+    }
+}
+```
+
+##  What methods does Java generate automatically?
+
+For this record:
+```
+public record Country(String name, String capital, int population) { }
+```
+
+Java generates the following:-
+
+#### 1️⃣ Canonical Constructor
+```
+public Country(String name, String capital, int population) {
+    this.name = name;
+    this.capital = capital;
+    this.population = population;
+}
+```
+📌 Used when you do:
+
+new Country("India", "New Delhi", 140);
+
+#### 2️⃣ Accessor Methods (NOT getters)
+```
+public String name() { return name; }
+public String capital() { return capital; }
+public int population() { return population; }
+```
+
+
+##### ⚠️ Important:-
+
+❌ getName()
+
+✅ name()
+
+#### 3️⃣ equals() Method
+```
+@Override
+public boolean equals(Object o) {
+    // compares all components: name, capital, population
+}
+```
+
+📌 Two records are equal if all fields are equal
+
+#### 4️⃣ hashCode() Method
+```
+@Override
+public int hashCode() {
+    // based on name, capital, population
+}
+```
+
+
+📌 Makes records perfect for:
+
+HashMap keys
+
+HashSet elements
+
+
+#### 5️⃣ toString() Method
+Country[name=India, capital=New Delhi, population=140]
+
+
+Automatically generated format.
+
+🔒 Other Things Java Enforces Automatically
+
+Fields are:
+
+private final String name;
+private final String capital;
+private final int population;
+
+
+Record class is:
+
+public final class Country
+
+
+❌ No setters allowed
 
 
