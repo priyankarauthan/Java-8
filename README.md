@@ -273,4 +273,34 @@ This means thousands of virtual threads can share just a handful of carrier thre
 | **Pinning Risk** | Can get pinned to carrier when using `synchronized` | Not applicable |
 
 
+## . Records (
+
+Records reduce boilerplate code.
+
+Before:
+```
+class User {
+    private String name;
+    private int age;
+}
+```
+
+After:
+```
+record User(String name, int age) {}
+```
+
+***Automatically generates:-***
+
+constructor
+
+getters
+
+equals
+
+hashCode
+
+toString
+
+
 
