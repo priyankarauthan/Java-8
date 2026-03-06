@@ -1,4 +1,4 @@
-# Java 8 & AboveInterview Coding Questions
+# Java 8 & Above Interview Coding Questions
 
 ### 1. What are the key features of Java 8?
 
@@ -230,5 +230,47 @@ public final class Country
 
 
 ❌ No setters allowed
+
+
+## What is a Virtual Thread?
+Virtual threads are lightweight threads introduced as a stable feature in Java 21 under Project Loom (JEP 444). They are managed by the JVM rather than the operating system.
+
+The Problem They Solve
+Traditional platform threads are expensive — each one consumes ~1MB of stack memory and requires an OS syscall to create. In high-concurrency apps (e.g., a server handling 10,000 requests), this becomes a bottleneck fast.
+The old workaround was reactive/async programming (CompletableFuture, WebFlux), which works but makes code complex and hard to debug.
+Virtual threads solve this without sacrificing simplicity.
+
+How They Work
+
+The JVM maintains a pool of carrier threads (platform threads, usually = CPU cores)
+Virtual threads are mounted onto a carrier thread to execute
+When a virtual thread blocks (e.g., waiting for a DB response), the JVM unmounts it and lets the carrier thread run another virtual thread
+When the block resolves, the virtual thread gets remounted and continues
+
+This means thousands of virtual threads can share just a handful of carrier threads.
+
+[ Virtual Thread 1 ] ──┐
+[ Virtual Thread 2 ] ──┼──► [ Carrier Thread 1 (OS Thread) ] ──► CPU Core 1
+[ Virtual Thread 3 ] ──┘
+
+[ Virtual Thread 4 ] ──┐
+[ Virtual Thread 5 ] ──┼──► [ Carrier Thread 2 (OS Thread) ] ──► CPU Core 2
+[ Virtual Thread 6 ] ──┘
+
+## Key Differences
+
+| Aspect | Virtual Thread | Carrier Thread |
+|------|------|------|
+| **Definition** | Lightweight JVM-managed thread | OS-backed platform thread hosting virtual threads |
+| **Creation Cost** | Extremely low (nanoseconds) | High (involves OS syscall) |
+| **Memory Footprint** | Small (a few KB, grows as needed) | Large (≈ 1 MB stack by default) |
+| **Quantity** | Millions possible | Limited (usually ≈ number of CPU cores) |
+| **Blocking Behavior** | Unmounts from carrier thread when blocked | Blocks the OS thread entirely |
+| **Scheduling** | JVM scheduler (cooperative) | OS scheduler (preemptive) |
+| **Use Case** | I/O-bound, high-concurrency tasks | CPU-bound tasks, runs virtual threads |
+| **Created By** | Developer / application code | JVM internally (ForkJoinPool) |
+| **Thread Identity** | `Thread.isVirtual()` returns `true` | `Thread.isVirtual()` returns `false` |
+| **Pinning Risk** | Can get pinned to carrier when using `synchronized` | Not applicable |
+
 
 
