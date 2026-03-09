@@ -259,14 +259,169 @@ public final class Country
 
 
 ## What is a Virtual Thread?
-Virtual threads are lightweight threads introduced as a stable feature in Java 21 under Project Loom (JEP 444). They are managed by the JVM rather than the operating system.
+Virtual threads are lightweight threads introduced as a stable feature in Java 21 under Project Loom. They are managed by the JVM rather than the operating system.
 
-The Problem They Solve
+## The Problem They Solve
 Traditional platform threads are expensive — each one consumes ~1MB of stack memory and requires an OS syscall to create. In high-concurrency apps (e.g., a server handling 10,000 requests), this becomes a bottleneck fast.
 The old workaround was reactive/async programming (CompletableFuture, WebFlux), which works but makes code complex and hard to debug.
 Virtual threads solve this without sacrificing simplicity.
 
-How They Work
+##  How Virtual Thread Scheduling Works
+
+Steps:
+
+1️⃣ Virtual thread starts execution
+2️⃣ JVM assigns it to a carrier thread
+3️⃣ If it calls a blocking operation:
+
+Thread.sleep()
+Socket read
+DB call
+HTTP call
+
+4️⃣ JVM parks the virtual thread
+5️⃣ Carrier thread becomes free
+6️⃣ Another virtual thread runs
+
+This is why virtual threads scale extremely well.
+
+## Creating Virtual Threads
+Method 1 (Simple)
+```
+Thread.startVirtualThread(() -> {
+    System.out.println("Running virtual thread");
+});
+```
+
+Method 2 (Executor Service)
+```
+ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor();
+
+executor.submit(() -> {
+    System.out.println("Task running in virtual thread");
+});
+```
+## Example with Multiple Tasks
+```
+import java.util.concurrent.*;
+
+public class VirtualThreadExample {
+
+    public static void main(String[] args) throws Exception {
+
+        ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor();
+
+        for(int i=1;i<=5;i++){
+            int task=i;
+            executor.submit(() -> {
+                System.out.println("Task "+task+" running in "+Thread.currentThread());
+                Thread.sleep(1000);
+                return null;
+            });
+        }
+
+        executor.shutdown();
+    }
+}
+```
+
+## When to Use Virtual Threads
+
+Best for:
+
+✔ Web servers
+✔ Microservices
+✔ API calls
+✔ Database queries
+✔ I/O heavy workloads
+
+Example:
+
+Spring Boot APIs
+HTTP calls
+DB queries
+File operations
+
+ ## When NOT to Use Virtual Threads
+
+Not useful for:
+
+❌ CPU heavy tasks
+❌ Parallel computation
+
+Use:
+
+ForkJoinPool
+Parallel Streams
+CompletableFuture
+
+## Virtual Thread Example with Spring Boot
+Spring Boot can run each request on a virtual thread.
+ ```
+spring.threads.virtual.enabled=true
+```
+
+Now:
+
+1 API request = 1 virtual thread
+
+This allows millions of concurrent requests.
+
+## Why JVM Stores Them in Heap
+
+Because virtual threads must support suspension.
+
+Example:
+
+Thread.sleep(1000);
+
+What happens:
+
+1. JVM pauses virtual thread
+2. Saves stack frames in heap
+3. Releases carrier thread
+4. Later resumes execution
+
+This is called continuation.
+
+## Mount / Unmount Mechanism
+
+When a virtual thread runs:
+
+Virtual Thread
+      ↓
+Mounted on Carrier Thread
+      ↓
+Executed on CPU
+
+When it blocks:
+
+Virtual Thread
+      ↓
+Unmounted from carrier thread
+      ↓
+Stack stored in heap
+
+Carrier thread becomes free.
+
+##  Scheduling Happens
+
+Virtual threads are scheduled by the JVM scheduler, not the OS.
+
+Internally they are stored in a ForkJoinPool queue.
+
+Architecture:
+
+Virtual Thread
+      ↓
+JVM Scheduler
+      ↓
+ForkJoinPool Queue
+      ↓
+Carrier Thread (Platform Thread)
+      ↓
+CPU
+## How They Work?
 
 The JVM maintains a pool of carrier threads (platform threads, usually = CPU cores)
 Virtual threads are mounted onto a carrier thread to execute
