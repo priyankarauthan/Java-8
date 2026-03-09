@@ -301,6 +301,24 @@ equals
 hashCode
 
 toString
+## Helpful NullPointerException
 
+Java shows exact variable causing null.
 
+Before:
+
+NullPointerException
+
+After:
+
+Cannot invoke "user.getName()" because "user" is null
+
+## Sealed Classes (Introduced in Java 17)
+
+A Sealed Class is a class that restricts which other classes can extend or implement it.
+
+Normally in Java, any class can extend a public class.
+But with sealed classes, the parent class controls which subclasses are allowed.
+
+This gives better control over inheritance.
 
