@@ -1,8 +1,9 @@
 Topics:-
 
 [Virtual Threads](#what-is-a-virtual-thread)
-``
-
+[Sealed Classes](#sealed-classes)
+[Records](#records)
+[CompletableFuture](#completablefuture)
 
 
 
@@ -99,7 +100,7 @@ Java 8 introduced several new features, including:
 ✅ To avoid code duplication by providing common functionality to all implementations.
 ✅ They cannot be overridden by implementing classes, ensuring consistency.
 
-### What is CompletableFuture? 🤔
+### CompletableFuture? 🤔
 CompletableFuture is a way to run tasks in the background without blocking your main program. It helps execute long-running tasks (like fetching data from a database or calling an API) asynchronously.
 
 ### Why Use CompletableFuture?
@@ -298,7 +299,7 @@ This means thousands of virtual threads can share just a handful of carrier thre
 | **Pinning Risk** | Can get pinned to carrier when using `synchronized` | Not applicable |
 
 
-## . Records (
+##  Records (
 
 Records reduce boilerplate code.
 
@@ -338,7 +339,7 @@ After:
 
 Cannot invoke "user.getName()" because "user" is null
 
-## Sealed Classes (Introduced in Java 17)
+## Sealed Classes
 
 A Sealed Class is a class that restricts which other classes can extend or implement it.
 
