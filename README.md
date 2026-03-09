@@ -1,6 +1,6 @@
 Topics:-
 
-[Virtual Threads](#What is a Virtual Thread?)
+[Virtual Threads](#what-is-a-virtual-thread)
 ``
 
 
