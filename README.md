@@ -1,9 +1,9 @@
 Topics:-
 
--[Virtual Threads](#what-is-a-virtual-thread) 
--[Sealed Classes](#sealed-classes) 
--[Records](#records) 
--[CompletableFuture](#completablefuture) 
+- [Virtual Threads](#what-is-a-virtual-thread) 
+- [Sealed Classes](#sealed-classes) 
+- [Records](#records) 
+- [CompletableFuture](#completablefuture) 
 
 
 
