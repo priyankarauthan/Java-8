@@ -270,9 +270,9 @@ Virtual threads solve this without sacrificing simplicity.
 
 Steps:
 
-1️⃣ Virtual thread starts execution
-2️⃣ JVM assigns it to a carrier thread
-3️⃣ If it calls a blocking operation:
+1️⃣ Virtual thread starts execution 
+2️⃣ JVM assigns it to a carrier thread 
+3️⃣ If it calls a blocking operation: 
 
 Thread.sleep()
 Socket read
