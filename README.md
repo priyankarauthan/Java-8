@@ -3,7 +3,8 @@ Topics:-
 - [Virtual Threads](#what-is-a-virtual-thread) 
 - [Sealed Classes](#sealed-classes) 
 - [Records](#records) 
-- [CompletableFuture](#completablefuture) 
+- [CompletableFuture](#completablefuture)
+- [Java 17 Features](#java-17-features)
 
 
 
@@ -502,4 +503,220 @@ Normally in Java, any class can extend a public class.
 But with sealed classes, the parent class controls which subclasses are allowed.
 
 This gives better control over inheritance.
+
+## Java 17 Features
+Java 17 is a Long-Term Support (LTS) release (released in September 2021). Many companies upgraded from Java 8/11 to Java 17 because it introduces performance improvements, new language features, and security enhancements.
+
+Below are the most important Java 17 features (especially relevant for interviews).
+
+**1️⃣ Sealed Classes**
+
+Sealed classes allow you to restrict which classes can extend or implement a class/interface.
+
+This gives better control over inheritance.
+
+Example
+```
+public sealed class Shape
+    permits Circle, Rectangle {
+}
+```
+
+Only these classes can extend Shape.
+```
+final class Circle extends Shape { }
+
+final class Rectangle extends Shape { }
+```
+**Benefits**
+
+a)Better domain modeling
+
+b)More secure inheritance
+
+c)Works well with pattern matching
+
+**2️⃣ Pattern Matching for instanceof**
+
+Before Java 17, type casting was required.
+
+Before
+```
+if (obj instanceof String) {
+    String s = (String) obj;
+    System.out.println(s.length());
+}
+```
+Java 17
+```
+if (obj instanceof String s) {
+    System.out.println(s.length());
+}
+```
+
+No explicit casting required.
+
+**Benefits:**
+
+Cleaner code
+
+Less boilerplate
+
+**3️⃣ Records (Standardized)**
+
+Records were introduced earlier but fully standardized in Java 16/17.
+
+Records are used to create immutable data classes with less code.
+
+Example
+```
+public record User(String name, int age) {}
+```
+
+Compiler automatically generates:
+
+constructor
+
+getters
+
+equals()
+
+hashCode()
+
+toString()
+
+Equivalent traditional class:
+```
+class User {
+   private final String name;
+   private final int age;
+}
+```
+
+Much more boilerplate.
+
+**4️⃣ Switch Expression Improvements**
+
+Switch statements are now more concise.
+
+Old switch
+```
+switch(day) {
+ case MONDAY:
+ case TUESDAY:
+     result = "Weekday";
+     break;
+}
+```
+Java 17 switch expression
+```
+String result = switch(day) {
+    case MONDAY, TUESDAY -> "Weekday";
+    case SATURDAY, SUNDAY -> "Weekend";
+};
+```
+**Benefits:**
+
+Less boilerplate
+
+Safer
+
+Returns values directly
+
+**5️⃣ Text Blocks**
+
+Text blocks allow writing multi-line strings easily.
+
+Example
+```
+String json = """
+{
+   "name": "Priyanka",
+   "role": "Engineer"
+}
+""";
+```
+
+Before Java 17:
+```
+String json = "{\n" +
+              "\"name\":\"Priyanka\"\n" +
+              "}";
+```
+
+Much cleaner now.
+
+**6️⃣ New Random Number Generator API**
+
+Java 17 introduced new random generator interfaces.
+
+Example:
+```
+RandomGenerator generator = RandomGenerator.getDefault();
+System.out.println(generator.nextInt());
+```
+
+Benefits:
+
+Better randomness algorithms
+
+Improved performance
+
+**7️⃣ Strong Encapsulation of JDK Internals**
+
+Java 17 strongly encapsulates internal JDK APIs.
+
+This improves:
+
+security
+
+maintainability
+
+modularity
+
+Example:
+
+Accessing internal APIs like:
+
+sun.misc.Unsafe
+
+is restricted.
+
+8️⃣ Foreign Function & Memory API (Incubator)
+
+Allows Java programs to interact with native memory and external libraries without JNI.
+
+Example use cases:
+
+calling C libraries
+
+working with off-heap memory
+
+9️⃣ Deprecation and Removal
+
+Java 17 removed or deprecated some old APIs:
+
+Examples:
+
+Applet API deprecated
+
+Security manager deprecated
+
+1️⃣0️⃣ Performance Improvements
+
+Java 17 also improved:
+
+Garbage collectors
+
+JVM performance
+
+Startup time
+
+Memory management
+
+Examples:
+
+ZGC improvements
+
+G1GC improvements
 
