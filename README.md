@@ -623,6 +623,163 @@ Safer
 
 Returns values directly
 
+Java 17 includes enhancements to the switch statement, mainly making it more concise, safer, and expressive. These improvements started in Java 12–14 and became standard by Java 17.
+
+**There are two major improvements:**
+
+a) Switch Expressions
+
+b) Arrow (->) syntax
+
+**1️⃣ Problem with Old Switch (Before Java 14)**
+
+The traditional switch had problems:
+
+Required break statements
+
+Risk of fall-through bugs
+
+Verbose syntax
+
+Old Switch Example
+int day = 2;
+String result;
+```
+switch(day) {
+    case 1:
+        result = "Monday";
+        break;
+    case 2:
+        result = "Tuesday";
+        break;
+    default:
+        result = "Invalid";
+}
+```
+
+Problems:
+
+Forgetting break causes bugs.
+
+Example bug:
+```
+
+case 1:
+    result = "Monday";
+case 2:
+    result = "Tuesday";
+```
+
+Output becomes Tuesday due to fall-through.
+
+**2️⃣ Switch Expression (Java 17)**
+
+Now switch can return values directly.
+
+Example
+int day = 2;
+
+String result = switch(day) {
+    case 1 -> "Monday";
+    case 2 -> "Tuesday";
+    default -> "Invalid";
+};
+
+System.out.println(result);
+
+Benefits:
+
+No break
+
+No fall-through
+
+Cleaner syntax
+
+**3️⃣ Multiple Labels in One Case**
+
+You can combine cases easily.
+
+Example
+```
+int day = 6;
+
+String type = switch(day) {
+    case 1,2,3,4,5 -> "Weekday";
+    case 6,7 -> "Weekend";
+    default -> "Invalid";
+};
+```
+
+Output:
+
+Weekend
+**4️⃣ Using Block Logic in Switch**
+
+If logic is complex, use {} with yield.
+
+Example
+```
+int num = 5;
+
+String result = switch(num) {
+    case 1 -> "One";
+
+    case 5 -> {
+        System.out.println("Processing number 5");
+        yield "Five";
+    }
+
+    default -> "Unknown";
+};
+```
+
+yield returns value from the switch block.
+
+**5️⃣ Switch Works with Strings**
+
+Java 17 switch works nicely with strings.
+```
+String role = "ADMIN";
+
+String access = switch(role) {
+    case "ADMIN" -> "Full Access";
+    case "USER" -> "Limited Access";
+    default -> "No Access";
+};
+```
+**6️⃣ Comparison (Old vs New)**
+Feature	Old Switch	Java 17 Switch
+Break required	Yes	No
+Fall-through risk	Yes	No
+Returns value	No	Yes
+Multiple labels	Hard	Easy
+Syntax	Verbose	Concise
+**7️⃣ Real Backend Example**
+
+Example role-based access:
+```
+String role = "ADMIN";
+
+String permission = switch(role) {
+    case "ADMIN" -> "ALL_PERMISSIONS";
+    case "MANAGER" -> "LIMITED_PERMISSIONS";
+    case "USER" -> "BASIC_ACCESS";
+    default -> "NO_ACCESS";
+};
+```
+🧠 Best Interview Answer
+
+You can say:
+
+Java 17 enhanced switch statements by introducing switch expressions and arrow syntax. The new switch allows returning values directly, eliminates the need for break statements, prevents fall-through errors, and supports multiple case labels. It makes switch statements more concise and readable.
+
+
+
+
+
+
+
+
 **5️⃣ Text Blocks**
 
 Text blocks allow writing multi-line strings easily.
