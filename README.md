@@ -5,6 +5,7 @@ Topics:-
 - [Records](#records) 
 - [CompletableFuture](#completablefuture)
 - [Java 17 Features](#java-17-features)
+- [Switch Expression Improvement](#switch-expression-improvement)
 
 
 
@@ -772,10 +773,6 @@ String permission = switch(role) {
 You can say:
 
 Java 17 enhanced switch statements by introducing switch expressions and arrow syntax. The new switch allows returning values directly, eliminates the need for break statements, prevents fall-through errors, and supports multiple case labels. It makes switch statements more concise and readable.
-
-
-
-
 
 
 
