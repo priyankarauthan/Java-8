@@ -6,6 +6,7 @@ Topics:-
 - [CompletableFuture](#completablefuture)
 - [Java 17 Features](#java-17-features)
 - [Switch Expression Improvement](#switch-expression-improvement)
+- [Lombok vs Records](#difference-between-lombok-and-records)
 
 
 
@@ -13,15 +14,16 @@ Topics:-
 
 
 
+## Difference Between Lombok and Records
 
-
-
-
-
-
-
-
-
+| Feature         | Lombok                     | Records                  |
+| --------------- | -------------------------- | ------------------------ |
+| Type            | Library                    | Java language feature    |
+| Mutability      | Mutable by default         | Immutable                |
+| Dependency      | Requires Lombok dependency | No dependency            |
+| Code generation | Annotation processing      | Built into Java compiler |
+| Flexibility     | Very flexible              | Limited structure        |
+| Java version    | Works with Java 8+         | Java 16+                 |
 
 
 
