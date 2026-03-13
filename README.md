@@ -7,6 +7,7 @@ Topics:-
 - [Java 17 Features](#java-17-features)
 - [Switch Expression Improvement](#switch-expression-improvement)
 - [Lombok vs Records](#difference-between-lombok-and-records)
+- [What is Optional?](#optional)
 
 
 
@@ -47,6 +48,52 @@ Java 8 introduced several new features, including:
 ✅ New Date and Time API – LocalDate, LocalTime, LocalDateTime
 
 ✅ Collectors and Functional Interfaces – Collectors.toList(), Predicate, Consumer
+
+## Optional
+
+Optional is a container object that may contain a value or may be empty.
+
+Instead of writing:
+```
+String name = getName();
+if(name != null){
+    System.out.println(name);
+}
+
+We use:
+
+Optional<String> name = getName();
+name.ifPresent(System.out::println);
+```
+
+a) **Optional.of()**
+
+Creates Optional with a non-null value.
+
+If value is null → NullPointerException
+b) **Optional.ofNullable()**
+
+Handles null safely.
+
+
+
+| Method        | Purpose                    |
+| ------------- | -------------------------- |
+| empty()       | create empty optional      |
+| of()          | create optional with value |
+| ofNullable()  | handle null safely         |
+| isPresent()   | check value                |
+| get()         | retrieve value             |
+| ifPresent()   | execute if value exists    |
+| orElse()      | default value              |
+| orElseGet()   | lazy default value         |
+| orElseThrow() | throw exception            |
+| map()         | transform value            |
+| flatMap()     | avoid nested optional      |
+| filter()      | conditional filtering      |
+
+
+
 
 ### DATE TIME API
 
