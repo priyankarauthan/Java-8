@@ -70,7 +70,7 @@ a) **Optional.of()**
 
 Creates Optional with a non-null value.
 
-If value is null → NullPointerException
+If value is null → NullPointerException    
 b) **Optional.ofNullable()**
 
 Handles null safely.
