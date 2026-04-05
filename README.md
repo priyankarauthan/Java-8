@@ -342,18 +342,21 @@ Virtual threads solve this without sacrificing simplicity.
 
 Steps:
 
-1️⃣ Virtual thread starts execution 
-2️⃣ JVM assigns it to a carrier thread 
-3️⃣ If it calls a blocking operation: 
-
-Thread.sleep()
-Socket read
-DB call
-HTTP call
-
-4️⃣ JVM parks the virtual thread
-5️⃣ Carrier thread becomes free
-6️⃣ Another virtual thread runs
+Step-by-step:-
+a) Virtual thread starts running
+b) JVM mounts it on a carrier thread (platform thread)
+c) It executes normally
+d) Blocking call happens (sleep, I/O, DB, HTTP, etc.)
+e) JVM does:
+Un-mounts (parks) the virtual thread
+Saves its state (stack, progress)
+Carrier thread becomes free
+→ Picks up another virtual thread
+f) When blocking operation completes:
+The same virtual thread becomes runnable again
+g)JVM schedules it:
+It gets any available carrier thread (not necessarily same one)
+It resumes exactly from where it stopped
 
 This is why virtual threads scale extremely well.
 
