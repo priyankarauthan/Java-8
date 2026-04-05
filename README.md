@@ -189,6 +189,7 @@ m) Garbage Collector Improvements (ZGC, G1)
 
 
 
+
 ### Records
 
 Java records are immutable data carrier classes that reduce boilerplate code by automatically generating constructors, accessors, equals, hashCode, and toString.
@@ -356,7 +357,7 @@ f) When blocking operation completes:
 The same virtual thread becomes runnable again
 g)JVM schedules it:
 It gets any available carrier thread (not necessarily same one)
-It resumes exactly from where it stopped
+It resumes exactly from where it stopped.
 
 This is why virtual threads scale extremely well.
 
