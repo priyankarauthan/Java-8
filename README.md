@@ -168,6 +168,27 @@ Similarly, CompletableFuture lets your program continue doing other work while w
  map()- transforms elements
  flatMap()- transforms AND flattens nested structures
 
+## Java 21 Features
+
+a) Virtual Threads    
+b) Structured Concurrency (Preview)    
+c) Scoped Values (Preview)    
+d) Sequenced Collections    
+e) Pattern Matching for Switch (Final)    
+f) Record Patterns (Final)    
+g) Unnamed Patterns and Variables (Preview)    
+h) String Templates (Preview)    
+i) Foreign Function & Memory API (Final)    
+j) Vector API (Sixth Incubator)    
+k) Key Encapsulation Mechanism (KEM) API    
+l) Deprecation of Windows 32-bit x86 Port    
+m) Garbage Collector Improvements (ZGC, G1)    
+
+
+
+
+
+
 ### Records
 
 Java records are immutable data carrier classes that reduce boilerplate code by automatically generating constructors, accessors, equals, hashCode, and toString.
